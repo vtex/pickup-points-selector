@@ -16,7 +16,8 @@
     "vtex.country-codes": "1.x"
   },
   "builders": {
-    "react": "2.x"
+    "react": "2.x",
+    "messages": "0.x"
   },
   "scripts": {
     "postreleasy": "vtex publish --public"
