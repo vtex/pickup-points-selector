@@ -5,6 +5,7 @@ import { withGoogleMaps } from './containers/withGoogleMaps'
 import { translate } from './utils/i18nUtils'
 import isEqual from 'lodash/isEqual'
 import get from 'lodash/get'
+import ResizeDetector from 'react-resize-detector'
 import { newAddress } from './utils/newAddress'
 import {
   HIDE_MAP,
@@ -110,7 +111,6 @@ export class PickupPointsSelector extends Component {
 
   componentWillUnmount() {
     this.setState({ isMounted: false })
-    window.removeEventListener('resize', this.resize, true)
   }
 
   componentDidMount() {
@@ -128,7 +128,6 @@ export class PickupPointsSelector extends Component {
         isMounted: true,
       })
     }
-    window.addEventListener('resize', this.resize)
   }
 
   setGeolocationFrom = () => {
@@ -181,11 +180,11 @@ export class PickupPointsSelector extends Component {
     })
   }
 
-  resize = debounce(() => {
+  resize = debounce(width => {
     if (!this.state.isMounted) return
     this.setState({
-      isLargeScreen: window.innerWidth > 1023,
-      mapStatus: window.innerWidth > 1023 ? SHOW_MAP : HIDE_MAP,
+      isLargeScreen: width > 1023,
+      mapStatus: width > 1023 ? SHOW_MAP : HIDE_MAP,
     })
   }, 200)
 
@@ -258,6 +257,8 @@ export class PickupPointsSelector extends Component {
       searchAddress,
       sellerId,
       storePreferencesData,
+      height,
+      maxHeight,
     } = this.props
 
     const {
@@ -273,8 +274,15 @@ export class PickupPointsSelector extends Component {
       showManualSearch,
     } = this.state
 
-    const content = (
-      <React.Fragment>
+    return (
+      <ResizeDetector handleWidth onResize={this.resize}>
+        <div style={{
+          width: '100%',
+          overflow: 'hidden',
+          height,
+          maxHeight,
+        }}>
+          <Fragment>
         {(isLargeScreen || mapStatus === SHOW_MAP) && (
           <Map
             activatePickupDetails={this.activatePickupDetails}
@@ -417,6 +425,7 @@ export class PickupPointsSelector extends Component {
           {content}
         </div>
       </div>
+      </ResizeDetector>
     )
   }
 }
