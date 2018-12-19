@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { injectIntl, intlShape } from 'react-intl'
-import PickupPointsModal from '../../react/PickupPointsModal'
+import PickupPointsSelector from '../../react/PickupPointsSelector'
 import { newAddress } from '../../react/utils/newAddress'
 import BRA from '@vtex/address-form/lib/country/BRA'
 import { SEARCH } from '../../react/constants/index'
@@ -51,10 +51,6 @@ class App extends Component {
     }
   }
 
-  handleCloseModal = () => this.setState({ isModalOpen: false })
-
-  handleOpenModal = () => this.setState({ isModalOpen: true })
-
   changeActivePickupDetails = () =>
     this.setState({
       selectedPickupPoint: pickupMock.pickupOptions[0],
@@ -62,9 +58,12 @@ class App extends Component {
 
   handleAddressChange = address => this.setState({ address })
 
+  handleConfirm = options => {
+    console.log('Selected pickup options:', options)
+  }
+
   render() {
     const {
-      isModalOpen,
       searchAddress,
       selectedPickupPoint,
       isPickupDetailsActive,
@@ -75,29 +74,26 @@ class App extends Component {
     } = this.state
 
     return (
-      <div>
-        {isModalOpen && (
-          <PickupPointsModal
-            activePickupPoint={selectedPickupPoint}
-            askForGeolocation={false}
-            changeActivePickupDetails={this.changeActivePickupDetails}
-            changeActiveSLAOption={() => {}}
-            closePickupPointsModal={this.handleCloseModal}
-            googleMapsKey={API_KEY}
-            intl={this.props.intl}
-            isPickupDetailsActive={isPickupDetailsActive}
-            items={items}
-            logisticsInfo={logisticsInfo}
-            onAddressChange={this.handleAddressChange}
-            pickupOptions={pickupMock.pickupOptions}
-            rules={BRA}
-            searchAddress={searchAddress}
-            selectedPickupPoint={selectedPickupPoint}
-            storePreferencesData={storePreferencesData}
-            pickupPoints={pickupPoints}
-          />
-        )}
-        <a onClick={this.handleOpenModal}>Open Modal</a>
+      <div className="w-100 h-100 overflow-hidden ba">
+        <PickupPointsSelector
+          activePickupPoint={selectedPickupPoint}
+          askForGeolocation={false}
+          changeActivePickupDetails={this.changeActivePickupDetails}
+          changeActiveSLAOption={() => {}}
+          onConfirm={this.handleConfirm}
+          googleMapsKey={API_KEY}
+          intl={this.props.intl}
+          isPickupDetailsActive={isPickupDetailsActive}
+          items={items}
+          logisticsInfo={logisticsInfo}
+          onAddressChange={this.handleAddressChange}
+          pickupOptions={pickupMock.pickupOptions}
+          rules={BRA}
+          searchAddress={searchAddress}
+          selectedPickupPoint={selectedPickupPoint}
+          storePreferencesData={storePreferencesData}
+          pickupPoints={pickupPoints}
+        />
       </div>
     )
   }
