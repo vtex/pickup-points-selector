@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { IntlProvider, addLocaleData } from 'react-intl'
-import enTranslation from '../locales/en.json'
+import enTranslation from '../../messages/en.json'
 import enLocale from 'react-intl/locale-data/en'
 import reduce from 'lodash/reduce'
 import getCountryISO2 from '@vtex/address-form/lib/countryISOMap'
@@ -48,7 +48,7 @@ class IntlContainer extends Component {
       import(`react-intl/locale-data/${baseLocale}`),
       this.importTranslations(baseLocale, locale),
       this.importAddressTranslations(baseLocale, locale),
-      this.importPickupPointsModalTranslations(baseLocale, locale),
+      this.importPickupPointsSelectorTranslations(baseLocale, locale),
       this.importCountryCodeTranslations(baseLocale, locale),
     ])
       .then(
@@ -56,7 +56,7 @@ class IntlContainer extends Component {
           localeData,
           translations,
           addressTranslations,
-          pickupPointsModalTranslations,
+          pickupPointsSelectorTranslations,
           countryCodeTranslations,
         ]) => {
           this.handleNewTranslations(
@@ -64,7 +64,7 @@ class IntlContainer extends Component {
             {
               ...translations,
               ...addressTranslations,
-              ...pickupPointsModalTranslations,
+              ...pickupPointsSelectorTranslations,
               ...countryCodeTranslations,
             },
             localeData
@@ -79,8 +79,8 @@ class IntlContainer extends Component {
 
   importTranslations(baseLocale, locale) {
     return Promise.all([
-      import(`../locales/${baseLocale}`),
-      import(`../locales/${locale}`),
+      import(`../../messages/${baseLocale}`),
+      import(`../../messages/${locale}`),
     ])
       .then(([baseTranslation, translation]) => {
         return {
@@ -92,7 +92,7 @@ class IntlContainer extends Component {
         if (process.env.NODE_ENV !== 'production') {
           this.couldNotFindModuleError(e)
         }
-        return import(`../locales/${baseLocale}`)
+        return import(`../../messages/${baseLocale}`)
           .then(baseTranslation => baseTranslation)
           .catch(() => {
             this.setState({
@@ -135,16 +135,16 @@ class IntlContainer extends Component {
       })
   }
 
-  importPickupPointsModalTranslations(baseLocale, locale) {
+  importPickupPointsSelectorTranslations(baseLocale, locale) {
     return Promise.all([
-      import(`@vtex/pickup-points-modal/lib/locales/${baseLocale}.json`),
-      import(`@vtex/pickup-points-modal/lib/locales/${locale}.json`),
+      import(`../../messages/${baseLocale}.json`),
+      import(`../../messages/${locale}.json`),
     ])
       .then(
-        ([basePickupPointsModalTranslation, pickupPointsModalTranslation]) => {
+        ([basePickupPointsSelectorTranslation, pickupPointsSelectorTranslation]) => {
           return {
-            ...basePickupPointsModalTranslation,
-            ...pickupPointsModalTranslation,
+            ...basePickupPointsSelectorTranslation,
+            ...pickupPointsSelectorTranslation,
           }
         }
       )
@@ -152,8 +152,8 @@ class IntlContainer extends Component {
         if (process.env.NODE_ENV !== 'production') {
           this.couldNotFindModuleError(e)
         }
-        return import(`@vtex/pickup-points-modal/lib/locales/${baseLocale}.json`).then(
-          basePickupPointsModalTranslation => basePickupPointsModalTranslation
+        return import(`../../messages/${baseLocale}.json`).then(
+          basePickupPointsSelectorTranslation => basePickupPointsSelectorTranslation
         )
       })
   }

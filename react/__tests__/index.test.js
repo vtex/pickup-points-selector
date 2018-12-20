@@ -13,7 +13,7 @@ import { addValidation } from '@vtex/address-form'
 import BRA from '@vtex/address-form/lib/country/BRA'
 import { PICKUP, DELIVERY, PICKUP_IN_STORE } from '../constants'
 
-loadTranslation('./react/locales/pt.json')
+loadTranslation('./messages/pt.json')
 setLocale('pt')
 
 describe('PickupModal', () => {
