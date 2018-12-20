@@ -33,7 +33,7 @@ import { getPickupSlaString } from './utils/GetString'
 
 import PinWaiting from './assets/components/PinWaiting'
 
-import './index.css'
+import './global.css'
 
 export class PickupPointsSelector extends Component {
   constructor(props) {
