@@ -1,17 +1,13 @@
-.pkpmodal-search {
+.container {
   position: relative;
+  z-index: 2;
 }
 
-.pkpmodal-search-alone .pkpmodal-search {
+.pkpmodal-search-alone .container {
   margin-top: 20px;
 }
 
-.pkpmodal-search input::placeholder {
-  color: #ccc;
-  font-weight: 300;
-}
-
-.pkpmodal-search input {
+.searchInput {
   font-size: 16px;
   height: auto;
   padding: 12px 52px 12px 46px !important;
@@ -23,7 +19,12 @@
   max-width: 100%;
 }
 
-.pkpmodal-search-icon {
+.searchInput::placeholder {
+  color: #ccc;
+  font-weight: 300;
+}
+
+.searchIcon {
   position: absolute;
   z-index: 99;
   left: 16px;
@@ -32,13 +33,13 @@
 
 /* ask for geolocation */
 
-.pkp-modal-ask-geolocation-btn:active,
-.pkp-modal-ask-geolocation-btn:focus {
+.askForGeolocationButton:active,
+.askForGeolocationButton:focus {
   outline: none !important;
 }
 
-.pkp-modal-ask-geolocation-btn:hover,
-.pkp-modal-ask-geolocation-btn {
+.askForGeolocationButton:hover,
+.askForGeolocationButton {
   background: #fff;
   border: 0;
   border-left: 1px solid #eee;
@@ -50,11 +51,11 @@
   top: 4px;
 }
 
-.pkp-modal-ask-geolocation-btn {
+.askForGeolocationButton {
   opacity: .9;
 }
 
-.pkp-modal-ask-geolocation-btn:hover {
+.askForGeolocationButton:hover {
   opacity: 1;
 }
 

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
 import { translate } from '../utils/i18nUtils'
 
-import './GeolocationStatus.css'
+import styles from './Geolocation.css'
 
 class GeolocationStatus extends Component {
   render() {
@@ -18,32 +18,44 @@ class GeolocationStatus extends Component {
     } = this.props
 
     return (
-      <div className="pkpmodal-locating">
-        <div className="pkpmodal-locating-content">
+      <div className={`pkpmodal-locating ${styles.locating}`}>
+        <div className={`pkpmodal-locating-content ${styles.locatingContent}`}>
           {titleTop && (
-            <h2 className="pkpmodal-locating-title">
+            <h2 className={`pkpmodal-locating-title ${styles.locatingTitle}`}>
               {translate(intl, titleTop)}
             </h2>
           )}
           {subtitleTop && (
-            <h3 className="pkpmodal-locating-subtitle">
+            <h3
+              className={`pkpmodal-locating-subtitle ${
+                styles.locatingSubtitle
+              }`}>
               {translate(intl, subtitleTop)}
             </h3>
           )}
           {Image && (
-            <div className="pkpmodal-locating-image">
+            <div className={`pkpmodal-locating-image ${styles.locatingImage}`}>
               <Image />
             </div>
           )}
           {(titleBottom || subtitleBottom) && (
-            <div className="pkpmodal-locating-instructions">
+            <div
+              className={`pkpmodal-locating-instructions ${
+                styles.locatingInstructions
+              }`}>
               {titleBottom && (
-                <h2 className="pkpmodal-locating-title-small">
+                <h2
+                  className={`pkpmodal-locating-title-small ${
+                    styles.locatingTitleSmall
+                  }`}>
                   {translate(intl, titleBottom)}
                 </h2>
               )}
               {subtitleBottom && (
-                <h3 className="pkpmodal-locating-subtitle">
+                <h3
+                  className={`pkpmodal-locating-subtitle ${
+                    styles.locatingSubtitle
+                  }`}>
                   {translate(intl, subtitleBottom)}
                 </h3>
               )}
@@ -52,7 +64,10 @@ class GeolocationStatus extends Component {
         </div>
 
         {children && (
-          <div className="pkpmodal-locating-actions">{children}</div>
+          <div
+            className={`pkpmodal-locating-actions ${styles.locatingActions}`}>
+            {children}
+          </div>
         )}
       </div>
     )

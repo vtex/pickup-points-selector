@@ -6,8 +6,6 @@ import PinBlocked from '../assets/components/PinBlocked'
 import PinLocationUnknown from '../assets/components/PinLocationUnknown'
 import PinNoPickups from '../assets/components/PinNoPickups'
 
-import './Error.css'
-
 import GeolocationStatus from './GeolocationStatus'
 import Button from './Button'
 import {
@@ -15,6 +13,8 @@ import {
   ERROR_COULD_NOT_GETLOCATION,
   ERROR_NOT_FOUND,
 } from '../constants'
+
+import styles from './Error.css'
 
 export class Error extends Component {
   getSubtitleString = () => {
@@ -34,7 +34,10 @@ export class Error extends Component {
     const { intl, status, onManualGeolocationError } = this.props
     const subtitleString = this.getSubtitleString()
     return (
-      <div className="pkpmodal-locating-wrapper-error">
+      <div
+        className={`pkpmodal-locating-wrapper-error ${
+          styles.locatingWrapperError
+        }`}>
         <GeolocationStatus
           Image={() => (
             <div>
@@ -49,7 +52,10 @@ export class Error extends Component {
           )}
           subtitleBottom={subtitleString}
           titleBottom={status}>
-          <div className="pkpmodal-locating-error-manual">
+          <div
+            className={`pkpmodal-locating-error-manual ${
+              styles.locatingErrorManual
+            }`}>
             <Button
               kind="primary"
               large

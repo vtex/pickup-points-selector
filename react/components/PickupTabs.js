@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
-import './PickupTabs.css'
 import { translate } from '../utils/i18nUtils'
 import { HIDE_MAP, SHOW_MAP } from '../constants'
+
+import styles from './PickupTabs.css'
+import buttonStyles from './Button.css'
 
 export class PickupTabs extends Component {
   handleLocationTab = event => {
@@ -17,12 +19,18 @@ export class PickupTabs extends Component {
     const { intl, mapStatus } = this.props
 
     return (
-      <div className="pkpmodal-pickup-view-mode">
+      <div className={`pkpmodal-pickup-view-mode ${styles.pickupViewMode}`}>
         <button
           className={`pkpmodal-pickup-view-list btn btn-link ${
+            styles.pickupViewList
+          } ${styles.linkButton} ${
             mapStatus === HIDE_MAP
-              ? 'pkpmodal-pickup-view-option-active'
-              : 'pkpmodal-pickup-view-option-inactive'
+              ? `pkpmodal-pickup-view-option-active ${
+                  styles.pickupViewOptionActive
+                }`
+              : `pkpmodal-pickup-view-option-inactive ${
+                  styles.pickupViewOptionInactive
+                }`
           }`}
           onClick={this.handleLocationTab}
           type="button"
@@ -31,9 +39,15 @@ export class PickupTabs extends Component {
         </button>
         <button
           className={`pkpmodal-pickup-view-map btn btn-link ${
+            styles.pickupViewMap
+          } ${styles.linkButton} ${
             mapStatus === SHOW_MAP
-              ? 'pkpmodal-pickup-view-option-active'
-              : 'pkpmodal-pickup-view-option-inactive'
+              ? `pkpmodal-pickup-view-option-active ${
+                  styles.pickupViewOptionActive
+                }`
+              : `pkpmodal-pickup-view-option-inactive ${
+                  styles.pickupViewOptionInactive
+                }`
           }`}
           onClick={this.handleLocationTab}
           type="button"

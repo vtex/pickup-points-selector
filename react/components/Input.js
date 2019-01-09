@@ -14,6 +14,7 @@ export class Input extends Component {
       onFocus,
       inputRef,
       autoFocus,
+      className,
     } = this.props
 
     const fieldValue = address.addressQuery
@@ -27,6 +28,7 @@ export class Input extends Component {
         onChange={this.handleChange}
         placeholder={placeholder}
         ref={inputRef}
+        className={className}
         style={{
           boxSizing: 'border-box',
           padding: '.8rem 1rem',
@@ -50,6 +52,7 @@ Input.propTypes = {
   onFocus: PropTypes.func,
   placeholder: PropTypes.string,
   value: PropTypes.string,
+  className: PropTypes.string,
 }
 
 export default injectIntl(Input)

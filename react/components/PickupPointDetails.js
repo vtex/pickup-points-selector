@@ -14,7 +14,7 @@ import ProductItems from './ProductItems'
 import PickupPointHour from './PickupPointHour'
 import Button from './Button'
 
-import './PickupPointDetails.css'
+import styles from './PickupPointDetails.css'
 
 export class PickupPointDetails extends Component {
   constructor(props) {
@@ -35,16 +35,15 @@ export class PickupPointDetails extends Component {
       ),
     }
   }
-  handleBackButtonClick = () => this.props.togglePickupDetails()
+
+  handleBackButtonClick = () => this.props.onBack()
 
   handleConfirmButtonClick = () => {
-    this.props.handleChangeActiveSLAOption({
+    this.props.onConfirm({
       slaOption: this.props.pickupPoint.id,
       sellerId: this.props.sellerId,
       shouldUpdateShippingData: false,
     })
-    this.props.togglePickupDetails()
-    this.props.handleClosePickupPointsModal()
   }
 
   render() {
@@ -69,23 +68,25 @@ export class PickupPointDetails extends Component {
         : formatBusinessHoursList(pickupPointInfo.businessHours)
 
     return (
-      <div className="pkpmodal-details">
-        <div className="pkpmodal-details-top">
+      <div className={`pkpmodal-details ${styles.details}`}>
+        <div className={`pkpmodal-details-top ${styles.detailsTop}`}>
           <button
-            className="pkpmodal-details-back-lnk btn btn-link"
+            className={`pkpmodal-details-back-lnk btn btn-link ${
+              styles.detailsBackLink
+            }`}
             onClick={this.handleBackButtonClick}
             type="button">
             <i
-              className={
-                'pkpmodal-icon-back-pickup-points-list icon-angle-left'
-              }
+              className={`pkpmodal-icon-back-pickup-points-list icon-angle-left ${
+                styles.iconBackPickupPointsList
+              }`}
             />
             {translate(intl, 'cancelBackList')}
           </button>
         </div>
 
-        <div className="pkpmodal-details-middle">
-          <div className="pkpmodal-details-store">
+        <div className={`pkpmodal-details-middle ${styles.detailsMiddle}`}>
+          <div className={`pkpmodal-details-store ${styles.detailsStore}`}>
             <PickupPoint
               isSelected={isSelectedSla}
               items={this.props.items}
@@ -97,9 +98,12 @@ export class PickupPointDetails extends Component {
             />
           </div>
 
-          <div className="pkpmodal-details-info">
-            <div className="pkpmodal-details-group">
-              <h3 className="title pkpmodal-details-info-title">
+          <div className={`pkpmodal-details-info ${styles.detailsInfo}`}>
+            <div className={`pkpmodal-details-group ${styles.detailsGroup}`}>
+              <h3
+                className={`title pkpmodal-details-info-title ${styles.title} ${
+                  styles.detailsInfoTitle
+                }`}>
                 {translate(intl, 'productsInPoint')}
               </h3>
               {items && <ProductItems items={items} />}
@@ -109,32 +113,49 @@ export class PickupPointDetails extends Component {
             </div>
             {pickupPoint.pickupStoreInfo &&
               pickupPoint.pickupStoreInfo.additionalInfo && (
-              <div className="pkpmodal-details-group">
-                <h3 className="pkpmodal-details-info-title">
-                  {translate(intl, 'aditionalInfo')}
-                </h3>
-                {pickupPoint.pickupStoreInfo.additionalInfo}
-              </div>
-            )}
+                <div
+                  className={`pkpmodal-details-group ${styles.detailsGroup}`}>
+                  <h3
+                    className={`pkpmodal-details-info-title ${
+                      styles.detailsInfoTitle
+                    }`}>
+                    {translate(intl, 'aditionalInfo')}
+                  </h3>
+                  {pickupPoint.pickupStoreInfo.additionalInfo}
+                </div>
+              )}
 
             {businessHours && (
-              <div className="pkpmodal-details-group">
-                <h3 className="pkpmodal-details-info-title">
+              <div className={`pkpmodal-details-group ${styles.detailsGroup}`}>
+                <h3
+                  className={`pkpmodal-details-info-title ${
+                    styles.detailsInfoTitle
+                  }`}>
                   {translate(intl, 'businessHours')}
                 </h3>
-                <table className="pkpmodal-details-hours">
+                <table
+                  className={`pkpmodal-details-hours ${styles.detailsHours}`}>
                   {businessHours.map((day, i) => {
                     return (
                       <tr key={i}>
-                        <td className="pkpmodal-details-hours-day">
+                        <td
+                          className={`${
+                            styles.detailsHoursTd
+                          } pkpmodal-details-hours-day`}>
                           {translate(intl, `weekDay${day.number}`)}
                         </td>
                         {day.closed ? (
-                          <td className="pkpmodal-details-hours-closed">
+                          <td
+                            className={`pkpmodal-details-hours-closed ${
+                              styles.detailsHoursClosed
+                            }`}>
                             {translate(intl, 'closed')}
                           </td>
                         ) : (
-                          <td className="pkpmodal-details-hours-range">
+                          <td
+                            className={`pkpmodal-details-hours-range ${
+                              styles.detailsHoursRange
+                            }`}>
                             <PickupPointHour time={day.openingTime} />{' '}
                             {translate(intl, 'hourTo')}{' '}
                             <PickupPointHour time={day.closingTime} />
@@ -149,7 +170,7 @@ export class PickupPointDetails extends Component {
           </div>
         </div>
 
-        <div className="pkpmodal-details-bottom">
+        <div className={`pkpmodal-details-bottom ${styles.detailsBottom}`}>
           <Button
             id={`confirm-pickup-${pickupPoint.id
               .replace(/[^\w\s]/gi, '')
@@ -168,19 +189,22 @@ export class PickupPointDetails extends Component {
 }
 
 PickupPointDetails.propTypes = {
-  handleChangeActiveSLAOption: PropTypes.func.isRequired,
-  handleClosePickupPointsModal: PropTypes.func.isRequired,
+  onConfirm: PropTypes.func.isRequired,
   intl: intlShape,
   isSelectedSla: PropTypes.bool,
   items: PropTypes.array.isRequired,
   logisticsInfo: PropTypes.array.isRequired,
+  onBack: PropTypes.func,
   onClickPickupModal: PropTypes.func,
   pickupPoint: PropTypes.object.isRequired,
   pickupPointInfo: PropTypes.object.isRequired,
   selectedRules: PropTypes.object.isRequired,
   sellerId: PropTypes.string,
   storePreferencesData: PropTypes.object.isRequired,
-  togglePickupDetails: PropTypes.func.isRequired,
+}
+
+PickupPointDetails.defaultProps = {
+  onBack: () => {},
 }
 
 export default injectIntl(PickupPointDetails)

@@ -11,7 +11,7 @@ import { ASK, WAITING, GRANTED, VTEXLOCAL, LOCALHOST } from '../constants'
 import SearchIcon from '../assets/components/SearchIcon'
 import Gps from '../assets/components/GPS'
 
-import './SearchForm.css'
+import styles from './SearchForm.css'
 
 class SearchForm extends Component {
   constructor(props) {
@@ -57,9 +57,12 @@ class SearchForm extends Component {
     }
   }
 
+  StylizedInput = props => (
+    <this.props.Input className={styles.searchInput} {...props} />
+  )
+
   render() {
     const {
-      Input,
       placeholder,
       isLoadingGoogle,
       intl,
@@ -73,7 +76,7 @@ class SearchForm extends Component {
 
     return (
       <form
-        className="pkpmodal-search"
+        className={`pkpmodal-search ${styles.container}`}
         id="pkpmodal-search"
         onFocus={setGeolocationFrom}
         onSubmit={event => event.preventDefault()}>
@@ -81,7 +84,7 @@ class SearchForm extends Component {
           address={address}
           autoFocus={isAutoFocus}
           googleMaps={googleMaps}
-          Input={Input}
+          Input={this.StylizedInput}
           inputProps={{
             onBlur: this.handleInputBlur,
             onFocus: this.handleInputFocus,
@@ -94,14 +97,16 @@ class SearchForm extends Component {
         />
         {navigator.geolocation &&
           this.state.isMyLocationButtonVisible && (
-          <button
-            className="pkp-modal-ask-geolocation-btn"
-            onClick={this.handleAskGeolocationClick}
-            title={translate(intl, 'askGeolocationAccept')}
-            type="button">
-            <Gps />
-          </button>
-        )}
+            <button
+              className={`pkp-modal-ask-geolocation-btn ${
+                styles.askForGeolocationButton
+              }`}
+              onClick={this.handleAskGeolocationClick}
+              title={translate(intl, 'askGeolocationAccept')}
+              type="button">
+              <Gps />
+            </button>
+          )}
         <SearchIcon />
       </form>
     )
