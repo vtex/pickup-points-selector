@@ -1,6 +1,6 @@
 {
   "name": "@vtex/pickup-points-selector",
-  "version": "2.0.1",
+  "version": "0.0.1",
   "description": "Pickup Points Selector React component",
   "main": "lib/index.js",
   "files": [
