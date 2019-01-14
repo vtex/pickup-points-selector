@@ -186,8 +186,14 @@ export class PickupPointsSelector extends Component {
     })
   }
 
-  handleResize = debounce(width => {
+  // TODO: use element width instead of window width
+  // The problem is that css media queries use window width,
+  // so there are inconsistencies
+
+  // handleResize = debounce(width => {
+  handleResize = debounce(() => {
     if (!this.state.isMounted) return
+    const width = window.innerWidth
     this.setState({
       isLargeScreen: width > 1023,
       mapStatus: width > 1023 ? SHOW_MAP : HIDE_MAP,
