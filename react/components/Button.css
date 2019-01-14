@@ -54,6 +54,7 @@
 
 .link {
   color: #08c;
+  background: transparent;
   cursor: pointer;
   border-color: transparent;
   -webkit-border-radius: 0;

@@ -34,10 +34,7 @@ export class Error extends Component {
     const { intl, status, onManualGeolocationError } = this.props
     const subtitleString = this.getSubtitleString()
     return (
-      <div
-        className={`pkpmodal-locating-wrapper-error ${
-          styles.locatingWrapperError
-        }`}>
+      <div className={`pkpmodal-locating-wrapper-error ${styles.wrapper}`}>
         <GeolocationStatus
           Image={() => (
             <div>
@@ -54,7 +51,7 @@ export class Error extends Component {
           titleBottom={status}>
           <div
             className={`pkpmodal-locating-error-manual ${
-              styles.locatingErrorManual
+              styles.manualGeolocation
             }`}>
             <Button
               kind="primary"

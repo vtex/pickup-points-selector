@@ -37,6 +37,11 @@ h4.pkpmodal-title {
   -webkit-overflow-scrolling: touch;
 }
 
+/* pickup point on a pickupPointsLit */
+.pickupPointsList > div > div {
+  box-shadow: 0 2px 2px 0 rgba(221, 221, 221, 0.5);
+}
+
 .pickupPointsItem {
   cursor: pointer;
   margin-bottom: 12px;

@@ -1,10 +1,10 @@
-.locatingWrapperError {
+.wrapper {
   display: flex;
   flex: auto;
 }
 
 /* actions */
 
-.locatingErrorManual {
+.manualGeolocation {
   font-size: 14px;
 }

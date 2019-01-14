@@ -66,7 +66,7 @@ export class PickupPoint extends Component {
 
     return (
       <div
-        className={`pkpmodal-pickup-point ${styles.pickupPoint}`}
+        className={`pkpmodal-pickup-point ${styles.container}`}
         id={pickupPoint.id
           .replace(/[^\w\s]/gi, '')
           .split(' ')

@@ -1,13 +1,9 @@
 /* main structue */
 
-.pickupPoint {
+.container {
   background-color: #fff;
   border: 1px solid #f4f4f4;
   border-radius: 4px;
-}
-
-.pkpmodal-points-list .pkpmodal-pickup-point {
-  box-shadow: 0 2px 2px 0 rgba(221, 221, 221, 0.5);
 }
 
 .pickupPointMain {
