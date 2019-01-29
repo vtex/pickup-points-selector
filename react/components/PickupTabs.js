@@ -5,7 +5,6 @@ import { translate } from '../utils/i18nUtils'
 import { HIDE_MAP, SHOW_MAP } from '../constants'
 
 import styles from './PickupTabs.css'
-import buttonStyles from './Button.css'
 
 export class PickupTabs extends Component {
   handleLocationTab = event => {

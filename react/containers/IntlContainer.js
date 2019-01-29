@@ -141,7 +141,10 @@ class IntlContainer extends Component {
       import(`../../messages/${locale}.json`),
     ])
       .then(
-        ([basePickupPointsSelectorTranslation, pickupPointsSelectorTranslation]) => {
+        ([
+          basePickupPointsSelectorTranslation,
+          pickupPointsSelectorTranslation,
+        ]) => {
           return {
             ...basePickupPointsSelectorTranslation,
             ...pickupPointsSelectorTranslation,
@@ -153,7 +156,8 @@ class IntlContainer extends Component {
           this.couldNotFindModuleError(e)
         }
         return import(`../../messages/${baseLocale}.json`).then(
-          basePickupPointsSelectorTranslation => basePickupPointsSelectorTranslation
+          basePickupPointsSelectorTranslation =>
+            basePickupPointsSelectorTranslation
         )
       })
   }

@@ -1,5 +1,5 @@
 import React from 'react'
-import IntlPickupModal, { PickupPointsModal } from '../PickupPointsModal'
+import IntlPickupModal, { PickupPointsModal } from '../PickupPointsSelector'
 import {
   mountWithIntl,
   shallowWithIntl,
