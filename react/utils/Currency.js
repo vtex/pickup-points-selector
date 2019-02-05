@@ -3,7 +3,12 @@ export function formatCurrency({
   storePreferencesData,
   options = { isInt: true },
 }) {
-  const { currencySymbol, currencyFormatInfo } = storePreferencesData
+  const { currencySymbol, currencyFormatInfo = {
+    currencyDecimalDigits: 2,
+    currencyDecimalSeparator: ',',
+    currencyGroupSeparator: '.',
+    currencyGroupSize: 3,
+  }} = storePreferencesData
 
   const {
     currencyDecimalDigits,
