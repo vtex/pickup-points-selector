@@ -60,6 +60,8 @@ export class PickupPointDetails extends Component {
 
     const { unavailableItems, items } = this.state
 
+    const hasItems = (items && items.length > 0) || (unavailableItems && unavailableItems.length > 0)
+
     const businessHours =
       !pickupPointInfo ||
       !pickupPointInfo.businessHours ||
@@ -99,18 +101,20 @@ export class PickupPointDetails extends Component {
           </div>
 
           <div className={`pkpmodal-details-info ${styles.detailsInfo}`}>
-            <div className={`pkpmodal-details-group ${styles.detailsGroup}`}>
-              <h3
-                className={`title pkpmodal-details-info-title ${styles.title} ${
-                  styles.detailsInfoTitle
-                }`}>
-                {translate(intl, 'productsInPoint')}
-              </h3>
-              {items && <ProductItems items={items} />}
-              {unavailableItems && (
-                <ProductItems isAvailable={false} items={unavailableItems} />
-              )}
-            </div>
+            {hasItems && (
+              <div className={`pkpmodal-details-group ${styles.detailsGroup}`}>
+                <h3
+                  className={`title pkpmodal-details-info-title ${styles.title} ${
+                    styles.detailsInfoTitle
+                  }`}>
+                  {translate(intl, 'productsInPoint')}
+                </h3>
+                {items && <ProductItems items={items} />}
+                {unavailableItems && (
+                  <ProductItems isAvailable={false} items={unavailableItems} />
+                )}
+              </div>
+            )}
             {pickupPoint.pickupStoreInfo &&
               pickupPoint.pickupStoreInfo.additionalInfo && (
                 <div
