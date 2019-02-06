@@ -103,11 +103,6 @@
       "^.+\\.js$": "<rootDir>/jest.transform.js"
     }
   },
-  "husky": {
-    "hooks": {
-      "pre-push": "yarn run lint"
-    }
-  },
   "bugs": {
     "url": "https://github.com/vtex/pickup-points-selector/issues"
   },
